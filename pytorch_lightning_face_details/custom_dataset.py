@@ -9,7 +9,7 @@ from torch.utils.data import Dataset
 from torchvision import transforms
 
 
-class FacesDataset(Dataset):
+class FacesDetailsDataset(Dataset):
     def __init__(self, base_path, transform=None):
         self.base_path = Path(base_path)
         self.csv_path = Path(base_path, "person.csv")
@@ -102,7 +102,7 @@ if __name__ == "__main__":
         transforms.Normalize((0.5, 0.5, 0.5), (0.5, 0.5, 0.5))
     ])
     root_dir = Path("/home/sam/Downloads/face_details_dataset")
-    rtl_dataset = FacesDataset(str(root_dir), transform=transform)
+    rtl_dataset = FacesDetailsDataset(str(root_dir), transform=transform)
     output = torch.Tensor([4., 3., 1., 1., 6., 1.])
     result = rtl_dataset.decode_data(output)
     one = 1

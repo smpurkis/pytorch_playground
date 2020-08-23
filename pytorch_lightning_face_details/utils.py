@@ -5,7 +5,7 @@ from sklearn.model_selection import train_test_split
 from torch.utils.data import DataLoader, Subset
 from torchvision import transforms
 
-from pytorch_lightning_face_details.custom_dataset import FacesDataset
+from pytorch_lightning_face_details.custom_dataset import FacesDetailsDataset
 
 
 def split_dataset(dataset, test_split=0.25, train_sample_number=None, val_sample_number=None, seed=0):
@@ -40,7 +40,7 @@ def get_dataloaders(return_classes=False):
     ])
     train_sample_number = 800
     val_sample_number = 200
-    rtl_dataset = FacesDataset(str(root_dir), transform=transform)
+    rtl_dataset = FacesDetailsDataset(str(root_dir), transform=transform)
     labels = rtl_dataset.classes
     train_dataset, val_dataset = split_dataset(rtl_dataset,
                                                train_sample_number=train_sample_number,
