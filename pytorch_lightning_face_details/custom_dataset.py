@@ -86,7 +86,7 @@ class FacesDetailsDataset(Dataset):
                   for index, class_number in enumerate(output)}
         return result
 
-    def categorize_data(self, data, number_of_categories=10):
+    def categorize_data(self, data, number_of_categories=5):
         split = pd.qcut(data, number_of_categories, duplicates="drop")
         label_encoder = [str(elem) for elem in split.categories]
         data = split.codes

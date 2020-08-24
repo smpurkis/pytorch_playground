@@ -22,7 +22,7 @@ class FaceDetailsNet(pl.LightningModule):
         self.classes = classes
 
         self.feature_extractor = timm.create_model(backbone, pretrained=True)
-        self.dropout = nn.Dropout(0.7)
+        self.dropout = nn.Dropout(0.25)
         self.pretrained_out = nn.Linear(in_features=1000, out_features=6)
 
     def forward(self, tensor):
@@ -134,13 +134,13 @@ if __name__ == "__main__":
     train_dataloader, val_dataloader, classes = get_dataloaders(return_classes=True)
 
     backbone = "mobilenetv2_100"
-    net = FaceDetailsNet(backbone=backbone, classes=classes)
+    net = FaceDetailsNet(backbone=backbone, classes=classes, lr=1e-3)
 
     rand_tensor = torch.rand(1, 3, 256, 256)
     t = net(rand_tensor)
 
     # summary(net, rand_tensor)
-    epochs = 1
+    epochs = 15
     trainer = pl.Trainer(min_epochs=1, max_epochs=epochs, gpus=1)
     trainer.fit(net)
 
